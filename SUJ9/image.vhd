@@ -45,7 +45,7 @@ component balleController is
            
            score1 : inout STD_LOGIC_VECTOR(3 downto 0);
            score2 : inout STD_LOGIC_VECTOR(3 downto 0);
-           
+
            color : out STD_LOGIC_VECTOR(1 downto 0));
 end component;
 
@@ -107,7 +107,6 @@ begin
                 red <= "1111";
                 green <= "0000";
                 blue <= "0000";
-                
             -- raquette gauche
             elsif ((currentWidth > xRG and currentWidth < xRG + raquetteWidth)
                 and (currentHeight > yRG - raquetteHeight and currentHeight < yRG + raquetteHeight)) then
@@ -138,9 +137,116 @@ begin
                 end case;
             end if;
             
-            -- scoreP1
+    --droite
+            --trait horizontal haut
+             if((currentWidth > 312+60 and currentWidth < 328+60 and (currentHeight > 12 and currentHeight<15 ))and (scoreP2=0 or scoreP2=2 or scoreP2=3 or scoreP2=5 or scoreP2=7 or scoreP2=8 or scoreP2=9))then 
+                red <= "1111";
+                green <= "0000";
+                blue <= "0000";
+            end if;
+            -- trait vertical haut gauche
+            if((currentWidth > 312+60 and currentWidth < 315+60 and (currentHeight > 16 and currentHeight<33 ))
+            and (scoreP2=0 or scoreP2=4 or scoreP2=5 or scoreP2=6 or scoreP2=8 or scoreP2=9))
+            then 
+                red <= "1111";
+                green <= "0000";
+                blue <= "0000";
+            end if;
+            -- trait vertical haut droit
+            if((currentWidth > 325+60 and currentWidth < 328+60 and (currentHeight > 16 and currentHeight<33 )) 
+            and (scoreP2=0 or scoreP2=1 or scoreP2=2 or scoreP2=3 or scoreP2=4 or scoreP2=7 or scoreP2=8 or scoreP2=9))
+            then 
+                red <= "1111";
+                green <= "0000";
+                blue <= "0000";
+            end if;
+      
+             -- trait vertical bas gauche
+            if((currentWidth > 312+60 and currentWidth < 315+60 and (currentHeight > 38 and currentHeight<55 )) and (scoreP2=0 or scoreP2=2 or scoreP2=2 or scoreP2=6 or scoreP2=8))
+            then 
+                red <= "1111";
+                green <= "0000";
+                blue <= "0000";
+            end if;
+            -- trait vertical bas droit
+            if((currentWidth > 325+60 and currentWidth < 328+60 and (currentHeight > 38 and currentHeight<55 ))
+            and (scoreP2=0 or scoreP2=1 or scoreP2=3 or scoreP2=4 or scoreP2=5 or scoreP2=6 or scoreP2=7 or scoreP2=8 or scoreP2=9))
+            then 
+                red <= "1111";
+                green <= "0000";
+                blue <= "0000";
+            end if;
+            -- trait horizontal bas
+            if((currentWidth > 312+60 and currentWidth < 328+60 and (currentHeight > 56 and currentHeight<59 ) and (scoreP2=0 or scoreP2=2 or scoreP2=3 or scoreP2=5 or scoreP2=6 or scoreP2=9 or scoreP2=8 or scoreP2=9))) then 
+                red <= "1111";
+                green <= "0000";
+                blue <= "0000";
+            end if;
+                       
+             -- trait horizontal milieu
+            if((currentWidth > 312+60 and currentWidth < 328+60 and (currentHeight > 34 and currentHeight<37 ) and (scoreP2=2 or scoreP2=3 or scoreP2=4 or scoreP2=5 or scoreP2=6 or scoreP2=9 or scoreP2=8 or scoreP2=9)))then 
+                red <= "1111";
+                green <= "0000";
+                blue <= "0000";
+            end if;
+               
+            --gauche
             
-        end if;
+                        --trait horizontal haut
+             if((currentWidth > 312-60 and currentWidth < 328-60 and (currentHeight > 12 and currentHeight<15 ))and (scoreP1=0 or scoreP1=2 or scoreP1=3 or scoreP1=5 or scoreP1=7 or scoreP1=8 or scoreP1=9))then 
+                red <= "0000";
+                green <= "0000";
+                blue <= "1111";
+            end if;
+            -- trait vertical haut gauche
+            if((currentWidth > 312-60 and currentWidth < 315-60 and (currentHeight > 16 and currentHeight<33 ))
+            and (scoreP1=0 or scoreP1=4 or scoreP1=5 or scoreP1=6 or scoreP1=8 or scoreP1=9))
+            then 
+                red <= "0000";
+                green <= "0000";
+                blue <= "1111";
+            end if;
+            -- trait vertical haut droit
+            if((currentWidth > 325-60 and currentWidth < 328-60 and (currentHeight > 16 and currentHeight<33 )) 
+            and (scoreP1=0 or scoreP1=1 or scoreP1=2 or scoreP1=3 or scoreP1=4 or scoreP1=7 or scoreP1=8 or scoreP1=9))
+            then 
+                red <= "0000";
+                green <= "0000";
+                blue <= "1111";
+            end if;
+      
+             -- trait vertical bas gauche
+            if((currentWidth > 312-60 and currentWidth < 315-60 and (currentHeight > 38 and currentHeight<55 ))and (scoreP1=0 or scoreP1=2 or scoreP1=2 or scoreP1=6 or scoreP1=8))
+            then 
+                red <= "0000";
+                green <= "0000";
+                blue <= "1111";
+            end if;
+            -- trait vertical bas droit
+            if((currentWidth > 325-60 and currentWidth < 328-60 and (currentHeight > 38 and currentHeight<55 )) and (scoreP1=0 or scoreP1=1 or scoreP1=3 or scoreP1=4 or scoreP1=5 or scoreP1=6 or scoreP1=7 or scoreP1=8 or scoreP1=9))
+            then 
+                red <= "0000";
+                green <= "0000";
+                blue <= "1111";
+            end if;
+            -- trait horizontal bas
+            if((currentWidth > 312-60 and currentWidth < 328-60 and (currentHeight > 56 and currentHeight<59 ) and (scoreP1=0 or scoreP1=2 or scoreP1=3 or scoreP1=5 or scoreP1=6 or scoreP1=9 or scoreP1=8 or scoreP1=9))) then 
+                red <= "0000";
+                green <= "0000";
+                blue <= "1111";
+            end if;
+                       
+             -- trait horizontal milieu
+            if((currentWidth > 312-60 and currentWidth < 328-60 and (currentHeight > 34 and currentHeight<37 ) and (scoreP1=2 or scoreP1=3 or scoreP1=4 or scoreP1=5 or scoreP1=6 or scoreP1=9 or scoreP1=8 or scoreP1=9))) then 
+                red <= "0000";
+                green <= "0000";
+                blue <= "1111";
+            end if;
+           
+            
+            
+                
+            end if;            
     end if;
 end process;
 
