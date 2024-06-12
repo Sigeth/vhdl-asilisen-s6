@@ -52,6 +52,7 @@ end component;
 component image is
     port(clkScreen : in STD_LOGIC;
          clkGame : in STD_LOGIC;
+         rst : in STD_LOGIC;
            upP1 : in STD_LOGIC;
            downP1 : in STD_LOGIC;
            upP2 : in STD_LOGIC;
@@ -104,6 +105,7 @@ display : image
     port map(
             clkScreen => CLK_PIX,
             clkGame => CLK_GAME,
+            rst => RST,
             upP1 => btnU,
             downP1 => btnD,
             upP2 => btnL,

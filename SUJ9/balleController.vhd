@@ -5,6 +5,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity balleController is
     Port ( clk : in STD_LOGIC;
+           reset : in STD_LOGIC;
            initialized : in STD_LOGIC;
            
            xRaquetteD : in STD_LOGIC_VECTOR(9 downto 0);
@@ -27,7 +28,7 @@ signal cnt : std_logic_vector(3 downto 0) := (others => '0');
 signal cntSpeed : std_logic_vector(2 downto 0) := (others => '0');
 
 begin
-process(clk)
+process(clk, reset)
 variable speedX : integer := 1;
 variable speedY : integer := 1;
 
@@ -47,6 +48,15 @@ variable xB : integer;
 variable yB : integer;
 
 begin
+    if (reset = '1') then
+        x <= "0101000000"; -- maxWidth/2
+        y <= "0011110000"; -- maxHeight/2
+        
+        color <= "00";
+        
+        score1 <= (others => '0');
+        score2 <= (others => '0');
+    end if;
     if (clk'event and clk = '1') then
         cnt <= cnt + 1;
         if (initialized = '1') then
@@ -116,12 +126,21 @@ begin
                 if (xB + size >= maxWidth or xB - size <= 0) then
                     if (xB + size >= maxWidth) then
                         score1 <= score1 + 1;
+                        speedX := 1;
+                        if (score1 >= 9) then
+                            score1 <= (others => '0');
+                            score2 <= (others => '0');
+                        end if;
                     elsif (xB - size <= 0) then
                         score2 <= score2 + 1;
+                        speedX := -1;
+                        if (score2 >= 9) then
+                            score1 <= (others => '0');
+                            score2 <= (others => '0');
+                        end if;
                     end if;
                     x <= "0101000000"; -- maxWidth/2
                     y <= "0011110000"; -- maxHeight/2
-                    speedX := 1;
                     speedY := 1;
                     color <= "00";
                     cntSpeed <= (others => '0');

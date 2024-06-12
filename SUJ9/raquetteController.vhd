@@ -5,6 +5,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity raquetteController is
     port(clk : in STD_LOGIC;
+        reset : in STD_LOGIC;
         initialized : in STD_LOGIC;
         
         btnUp : in STD_LOGIC;
@@ -20,13 +21,16 @@ signal cnt : std_logic_vector(12 downto 0) := (others => '0');
 
 begin
 
-process(clk)
+process(clk, reset)
 constant maxWidth : integer := 640;
 constant maxHeight : integer := 480;
 
 constant raquetteWidth : integer := maxWidth/64;
 constant raquetteHeight : integer := maxHeight/16;
 begin
+    if (reset = '1') then
+        y <= "0011110000"; -- maxHeight/2
+    end if;
     if (clk'event and clk = '1') then
         if (initialized = '1') then
             if (btnUp = '1' and y > raquetteHeight/2) then
